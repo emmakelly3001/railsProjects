@@ -6,9 +6,33 @@ on:
       - main
 
 jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+
+      - name: Install dependencies
+        run: |
+          bundle config set path 'vendor/bundle'
+          bundle install
+
+      - name: Run security scans
+        run: |
+          bundle exec brakeman -q
+          bundle exec bundler-audit check --update
+
+      - name: Run RuboCop
+        run: |
+          bundle exec rubocop --fail-level W
+
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,9 +46,6 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          INSTANCE_ID="i-0f22b1484b0bc06f6"
-          PUBLIC_IP=3.95.24.227
-          
           ssh -o StrictHostKeyChecking=no -i KeyTwo.pem ubuntu@$PUBLIC_IP << 'EOF'
             set -e
             cd ~/projectApp
