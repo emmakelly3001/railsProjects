@@ -1,0 +1,38 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Environment Variables
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: |
+          echo "$SECRET_KEY" > KeyTwo.pem
+          chmod 600 KeyTwo.pem
+
+      - name: Deploy to EC2
+        run: |
+          INSTANCE_ID="i-0f22b1484b0bc06f6"
+          PUBLIC_IP=3.95.24.227
+          
+          ssh -o StrictHostKeyChecking=no -i KeyTwo.pem ubuntu@$PUBLIC_IP << 'EOF'
+            set -e
+            cd ~/projectApp
+            git pull origin main
+            bundle install
+            rails db:migrate
+          EOF
+
+      - name: Clean up
+        run: |
+          rm -f KeyTwo.pem
