@@ -1,0 +1,14 @@
+
+<div class="jumbotron">
+  <h1 class="display-4"><%= @project.name %></h1>
+  <p class="lead"><%= @project.description %></p>
+  <hr class="my-4">
+  <p>Hours Worked: <%= @project.hours_worked %> |
+  Finished: <%= @project.finished %></p>
+  <%= link_to "Edit this project", edit_project_path(@project), class:"btn btn-secondary" %>
+  <%= link_to "Back to projects", projects_path, class:"btn btn-dark" %>
+  <br><br>
+  <%= link_to "Delete this project", @project, method: :delete, class:"btn btn-danger" %>
+</div>
+</div>
+
