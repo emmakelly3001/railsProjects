@@ -18,6 +18,10 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > CADFinal.pem
           chmod 600 CADFinal.pem
+      
+      - name: Set executable permissions for bin files
+        run: |
+          chmod +x bin/*
 
       - name: Deploy to EC2
         run: |
@@ -27,7 +31,7 @@ jobs:
 
           ssh -o StrictHostKeyChecking=no -p $SSH_PORT -i CADFinal.pem ubuntu@$PUBLIC_IP << 'EOF'
             set -e
-            cd ec2-user@ip-172-31-81-79 railsProjects
+            cd /home/ec2-user/railsProjects
             git pull origin main
             bundle install
             rails db:migrate
