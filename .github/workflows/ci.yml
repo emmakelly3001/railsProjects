@@ -75,6 +75,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set executable permissions for bin files
+        run: chmod +x bin/*
+
       - name: Run tests
         env:
           RAILS_ENV: test
