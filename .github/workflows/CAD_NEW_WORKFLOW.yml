@@ -15,13 +15,10 @@ jobs:
       - name: Set up Environment Variables
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
         run: |
           echo "$SSH_PRIVATE_KEY" > CADFinal.pem
           chmod 600 CADFinal.pem
-      
-      - name: Set executable permissions for bin files
-        run: |
-          chmod +x bin/*
 
       - name: Deploy to EC2
         run: |
@@ -30,11 +27,11 @@ jobs:
           SSH_PORT=3003
 
           # Ensure you're using the correct EC2 user
-          ssh -o StrictHostKeyChecking=no -p $SSH_PORT -i CADFinal.pem ec2-user@$PUBLIC_IP << 'EOF'
+          ssh -o StrictHostKeyChecking=no -p $SSH_PORT -i CADFinal.pem ubuntu@$PUBLIC_IP << 'EOF'
             set -e
             # Ensure the directory exists, or create it
-            mkdir -p /home/ec2-user/railsProjects
-            cd /home/ec2-user/railsProjects
+            mkdir -p /home/ubuntu/railsProjects
+            cd /home/ubuntu/railsProjects
             git pull origin main
             RAILS_ENV=production bundle install
             RAILS_ENV=production rails db:migrate
