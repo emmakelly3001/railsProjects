@@ -27,11 +27,11 @@ jobs:
           SSH_PORT=3003
 
           # Ensure you're using the correct EC2 user
-            ssh -v -o StrictHostKeyChecking=no -p $SSH_PORT -i CADFinal.pem ubuntu@$PUBLIC_IP << 'EOF'
+            ssh -v -o StrictHostKeyChecking=no -p $SSH_PORT -i CADFinal.pem ec2-user@$PUBLIC_IP << 'EOF'
             set -e
             # Ensure the directory exists, or create it
-            mkdir -p /home/ubuntu/railsProjects
-            cd /home/ubuntu/railsProjects
+            mkdir -p /home/ec2-user/railsProjects
+            cd /home/ec2-user/railsProjects
             git pull origin main
             RAILS_ENV=production bundle install
             RAILS_ENV=production rails db:migrate
