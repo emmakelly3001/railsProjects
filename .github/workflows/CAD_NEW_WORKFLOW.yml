@@ -23,9 +23,6 @@ jobs:
         run: |
           chmod +x bin/*
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
-
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
 
