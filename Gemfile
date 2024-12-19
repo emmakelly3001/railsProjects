@@ -1,9 +1,10 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 7.2.2"
+ruby "3.3.5"
 gem "sprockets-rails"
 gem "sqlite3", ">= 1.4"
-gem 'devise', '~> 4.9', '>= 4.9.4'
+gem "devise", "~> 4.9", ">= 4.9.4"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
