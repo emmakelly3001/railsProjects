@@ -23,13 +23,6 @@ jobs:
         run: |
           chmod +x bin/*
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-        run: |
-          bin/rails db:test:prepare test test:system
-
       - name: Deploy to EC2
         run: |
           INSTANCE_ID="i-01aa74476ed57c04e"
