@@ -15,12 +15,12 @@ end
   describe "POST /users/sign_in with invalid credentials" do
     it 'does not log in the user and re-renders the login page' do
       post user_session_path, params: { user: { email: 'invalid@example.com', password: 'wrongpassword' } }
-    
+
       # Ensure that the login page is re-rendered
       expect(response).to render_template(:new)
-    
+
       # Ensure that no user is logged in (this step depends on your authentication logic)
       expect(controller.current_user).to be_nil
-    end    
+    end
   end
 end
