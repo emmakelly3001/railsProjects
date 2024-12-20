@@ -24,7 +24,7 @@ jobs:
         run: |
           INSTANCE_ID="4ei-01aa74476ed57c0"
           PUBLIC_IP=44.208.54.216
-          SSH_PORT=3003
+          SSH_PORT=3001
 
           # Ensure you're using the correct EC2 user
             ssh -v -o StrictHostKeyChecking=no -p $SSH_PORT -i CADFinal.pem ec2-user@$PUBLIC_IP << 'EOF'
