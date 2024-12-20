@@ -27,3 +27,9 @@ group :test do
 end
 
 gem "bundler-audit", "~> 0.9.2"
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "database_cleaner-active_record"
+end
