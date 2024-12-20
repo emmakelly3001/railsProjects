@@ -1,14 +1,18 @@
+<!-- Edit project -->
+
 <div class="card">
   <div class="card-header">
     <% content_for :title, "Editing project" %>
     <h4>Editing project</h4>
   </div>
   <div class="card-body">
+    <!-- Taking infromation from project partial -->
 <%= render "form", project: @project %>
 
 <br>
 
 <div>
+  <!-- Button to show project, and go back to project dashboard -->
   <%= link_to "Show this project", @project, class: "btn btn-secondary" %>
   <%= link_to "Back to projects", projects_path, class: "btn btn-dark" %>
 </div>

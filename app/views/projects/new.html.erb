@@ -1,3 +1,5 @@
+<!-- Add new project table -->
+
 <div class="card">
   <div class="card-header">
     <% content_for :title, "New project" %>
@@ -5,7 +7,9 @@
   </div>
   <div class="card-body">
 <div>
+  <!-- Taking information from form partial -->
   <%= render "form", project: @project %>
+  <!-- Going back to the project dashboard/table -->
   <%= link_to "Back to projects", projects_path, class: "btn btn-secondary" %>
 </div>
 

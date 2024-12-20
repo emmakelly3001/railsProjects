@@ -23,10 +23,10 @@ RSpec.describe 'UserSignUps', type: :request do
     context 'with invalid parameters' do
       it 'does not create a user and renders the sign-up page again' do
         post user_registration_path, params: { user: { email: '', password: 'password123', password_confirmation: 'password123' } }
-        
+
         expect(response).to have_http_status(:unprocessable_entity)  # Expecting the page to reload with errors
         expect(response.body).to include('Sign up')  # Check that the page includes the word "Sign up"
-        
+
         # Check if the error message for the email is displayed in the HTML response
         expect(response.body).to include('Email can&#39;t be blank')  # HTML encoding for single quote
       end

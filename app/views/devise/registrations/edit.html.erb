@@ -1,11 +1,14 @@
+<!-- Edit profile page -->
 <div class="card">
   <div class="card-header">
     <h2>Edit Profile</h2>
   </div>
   <div class="card-body">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<!-- error messages calling -->
   <%= render "devise/shared/error_messages", resource: resource %>
 
+<!--enter email  -->
   <div class="field form-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder:"Email" %>
   </div>
@@ -14,6 +17,7 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
+<!-- new password -->
   <div class="field form-group">
     <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder:"New Password (leave blank if you don't want to change it)" %>
     <% if @minimum_password_length %>
@@ -21,14 +25,17 @@
     <% end %>
   </div>
 
+<!-- confirm new password -->
   <div class="field form-group">
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder:"Confirm New Password"  %>
   </div>
 
+<!-- current password field -->
   <div class="field form-group">
     <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder:"Current Password (we need your current password to confirm your changes)" %>
   </div>
 
+<!-- update account button -->
   <div class="actions">
     <%= f.submit "Update", class: "btn btn-secondary" %>
   </div>
@@ -37,6 +44,7 @@
 </div>
 
 <br>
+<!-- Delete account button -->
 <div class="card">
   <div class="card-header">
     <h4>Cancel my account</h4>
